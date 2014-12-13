@@ -9,10 +9,10 @@
 }
 
 - (void) didLoadFromCCB{
-    // access audio object
-    audio = [OALSimpleAudio sharedInstance];
-    // play sound effect in a loop
-    [audio playBg:@"noFlexZone.mp3" loop:TRUE];
+//    // access audio object
+//    audio = [OALSimpleAudio sharedInstance];
+//    // play sound effect in a loop
+//    [audio playBg:@"noFlexZone.mp3" loop:TRUE];
 }
 
 - (void) startGame{
