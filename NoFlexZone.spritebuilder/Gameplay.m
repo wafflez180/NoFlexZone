@@ -22,6 +22,7 @@
     int noFlexTimeUp;
     CCLabelTTF *_tapToFlexLabel;
     bool pulsing;
+    CCNode *noFlexZone;
 }
 
 - (void) didLoadFromCCB{
@@ -29,6 +30,7 @@
     points = 0;
     noFlex = false;
     pulsing = true;
+    noFlexZone.visible = false;
     [self Pulse];
 }
 
@@ -76,11 +78,11 @@
     
     if (noFlex == true){
         
-        _noFlexZoneAlert.visible = true;
+        noFlexZone.visible = true;
         noFlexTimer++;
         if (noFlexTimer == noFlexTimeUp){
             noFlexTimer = 0;
-            _noFlexZoneAlert.visible = false;
+            noFlexZone.visible = false;
             noFlex = false;
         }
     }
