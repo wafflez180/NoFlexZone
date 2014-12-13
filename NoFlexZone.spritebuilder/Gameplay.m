@@ -20,21 +20,36 @@
     CCLabelTTF *_noFlexZoneAlert;
     int noFlexTimer;
     int noFlexTimeUp;
-    
+    CCLabelTTF *_tapToFlexLabel;
+    bool pulsing;
 }
 
 - (void) didLoadFromCCB{
-    
+    self.userInteractionEnabled = true;
     points = 0;
     noFlex = false;
-    
+    pulsing = true;
+    [self Pulse];
 }
 
-- (void) flex{
+-(void)Pulse{
+    if (pulsing) {
+        if (_tapToFlexLabel.opacity == 1) {
+            [_tapToFlexLabel runAction:[CCActionFadeOut actionWithDuration:1]];
+        }else{
+            [_tapToFlexLabel runAction:[CCActionFadeIn actionWithDuration:1]];
+        }
+        [self performSelector:@selector(Pulse) withObject:nil afterDelay:1.1];
+    }
+}
+
+-(void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event{
+    pulsing = false;
+    _tapToFlexLabel.visible = false;
     
     if (noFlex == false){
-    points++;
-     _pointsLabel.string = [NSString stringWithFormat:@"%d", points];
+        points++;
+        _pointsLabel.string = [NSString stringWithFormat:@"%d", points];
     }
     
     if (noFlex == true){
@@ -46,17 +61,16 @@
     }
 }
 
-
 - (void) update:(CCTime)delta{
  
     if (noFlex == false){
-    NoFlexProbability = arc4random()%480;
+    NoFlexProbability = arc4random()% 480;
         
         //100 is an arbitrarily chosen number
         if (NoFlexProbability == 100){
             
             noFlex = true;
-            noFlexTimeUp = arc4random()%240;
+            noFlexTimeUp = arc4random()% 240;
         }
     }
     
