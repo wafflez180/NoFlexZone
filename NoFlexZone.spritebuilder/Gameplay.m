@@ -64,26 +64,27 @@
 }
 
 - (void) update:(CCTime)delta{
- 
-    if (noFlex == false){
-    NoFlexProbability = arc4random()% 480;
-        
-        //100 is an arbitrarily chosen number
-        if (NoFlexProbability == 100){
+    if (pulsing == false) {
+        if (noFlex == false){
+            NoFlexProbability = arc4random()% 480;
             
-            noFlex = true;
-            noFlexTimeUp = arc4random()% 240;
+            //100 is an arbitrarily chosen number
+            if (NoFlexProbability == 100){
+                
+                noFlex = true;
+                noFlexTimeUp = arc4random()% 240;
+            }
         }
-    }
-    
-    if (noFlex == true){
         
-        noFlexZone.visible = true;
-        noFlexTimer++;
-        if (noFlexTimer == noFlexTimeUp){
-            noFlexTimer = 0;
-            noFlexZone.visible = false;
-            noFlex = false;
+        if (noFlex == true){
+            
+            noFlexZone.visible = true;
+            noFlexTimer++;
+            if (noFlexTimer == noFlexTimeUp){
+                noFlexTimer = 0;
+                noFlexZone.visible = false;
+                noFlex = false;
+            }
         }
     }
 }
